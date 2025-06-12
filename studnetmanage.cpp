@@ -91,9 +91,12 @@ students* students::sort()  //new
     students* temp_next = this->next;
     if (temp_next != NULL && temp->name >temp_next->name )
     {
+
         head = temp_next;
-        temp_next->next = temp;
-        temp_next = temp->next;
+        temp->next = temp_next->next;
+        temp_next->next = this;
+        temp_next = temp;
+        temp = this->next;
         
     }
     while (temp_next != NULL)

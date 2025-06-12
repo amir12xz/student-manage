@@ -78,18 +78,3 @@ void students::deletestudent(CString name)
 
     AfxMessageBox(_T("not found"));
 }
-students *students::sort()  //new
-{
-    students* temp = this;
-    students* temp_next = this->next;
-   // if(temp_next!=NULL&&temp->name>)
-    while (temp_next!=NULL)
-    {
-        if (temp->name > temp->next->name)
-        {
-           
-        }
-        temp = temp->next;
-    }
-    return this;
-}

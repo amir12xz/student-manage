@@ -16,7 +16,7 @@
 #define new DEBUG_NEW
 #endif
 
-students head;
+students *head;
 // CAboutDlg dialog used for App About
 
 class CAboutDlg : public CDialogEx
@@ -171,8 +171,8 @@ void CporganjipDlg::On32771()
 	if (ob1.DoModal() == IDOK)
 	{
 		UpdateData(0);
-		head.addstudnet(ob1.m_name,ob1.m_lastname,ob1.score);
- 
+		head=head->addstudnet(ob1.m_name,ob1.m_lastname,ob1.score);
+		head = head->sort();
 	}
 }
 
@@ -182,7 +182,7 @@ void CporganjipDlg::On32773()
 	searchST ob3;
 	if (ob3.DoModal() == IDOK)
 	{
-		head.searchstudent(ob3.namesearch);
+		head->searchstudent(ob3.namesearch);
 	}
 
 }
@@ -193,7 +193,7 @@ void CporganjipDlg::On32772()
 	hazfstudent ob4;
 	if (ob4.DoModal() == IDOK)
 	{
-		head.deletestudent(ob4.hazf_st);
+		head->deletestudent(ob4.hazf_st);
 	}
 }
  
@@ -205,6 +205,6 @@ void CporganjipDlg::On32775()
 {
 	// TODO: Add your command handler code here
 	viewstudent ob5;
-	ob5.data = &head;
+	ob5.data = head;
 	ob5.DoModal();
 }

@@ -2,12 +2,16 @@
 #include <iostream>
 #include <string>
 #include "studnetmanage.h"
-void students::addstudnet(CString name, CString lastname, float scor)
+students *students::addstudnet(CString name, CString lastname, float scor)
 {
 	students* newnode = new students;
 	newnode->name = name;
 	newnode->lastname = lastname;
 	newnode->score = scor;
+    if (this == NULL)
+    {
+       return newnode;
+    }
 	if (next == nullptr)
 	{
 		next = newnode;
@@ -21,6 +25,7 @@ void students::addstudnet(CString name, CString lastname, float scor)
 		}
 		temp->next = newnode;
 	}
+    return this;
 }
 void students::searchstudent(CString name)
 {
@@ -77,4 +82,36 @@ void students::deletestudent(CString name)
     }
 
     AfxMessageBox(_T("not found"));
+}
+students* students::sort()  //new
+{
+    students * pre = this;
+    students* temp = this;
+    students* head = this;
+    students* temp_next = this->next;
+    if (temp_next != NULL && temp->name >temp_next->name )
+    {
+        head = temp_next;
+        temp_next->next = temp;
+        temp_next = temp->next;
+        
+    }
+    while (temp_next != NULL)
+    {
+        if (temp->name > temp_next->name)
+        {
+            auto t = temp_next->next;
+            pre->next = temp_next;
+            temp_next->next = temp;
+            temp->next = t;
+            pre = temp_next;
+            temp = t;
+            temp_next = temp;
+            continue;
+        }
+        pre = temp;
+        temp = temp_next;
+        temp_next = temp_next->next;
+    }
+    return head;
 }

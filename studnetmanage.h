@@ -7,7 +7,7 @@ public:
 	students * addstudnet(CString,CString,float);
 	void searchstudent(CString);
 	void deletestudent(CString);
-	students* sort();
+	void sort();
 	students()
 	{
 		next = nullptr;

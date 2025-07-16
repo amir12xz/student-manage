@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "studnetmanage.h"
+using namespace std;
 students *students::addstudnet(CString name, CString lastname, float scor)
 {
 	students* newnode = new students;
@@ -83,38 +84,23 @@ void students::deletestudent(CString name)
 
     AfxMessageBox(_T("not found"));
 }
-students* students::sort()  //new
+void students::sort()
 {
-    students * pre = this;
-    students* temp = this;
-    students* head = this;
-    students* temp_next = this->next;
-    if (temp_next != NULL && temp->name >temp_next->name )
-    {
-
-        head = temp_next;
-        temp->next = temp_next->next;
-        temp_next->next = this;
-        temp_next = temp;
-        temp = this->next;
-        
-    }
-    while (temp_next != NULL)
-    {
-        if (temp->name > temp_next->name)
+    bool swapped;
+    do{
+        swapped = false;
+        students* current = this;
+        while (current->next != NULL)
         {
-            auto t = temp_next->next;
-            pre->next = temp_next;
-            temp_next->next = temp;
-            temp->next = t;
-            pre = temp_next;
-            temp = t;
-            temp_next = temp;
-            continue;
+            students* nextNode = current->next;
+            if (current->lastname > nextNode->lastname)
+            {
+                swap(current->name, nextNode->name);
+                swap(current->lastname, nextNode->lastname);
+                swap(current->score, nextNode->score);
+                swapped = true;
+            }
+            current = current->next;
         }
-        pre = temp;
-        temp = temp_next;
-        temp_next = temp_next->next;
-    }
-    return head;
+    }while (swapped);
 }

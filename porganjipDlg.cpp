@@ -172,7 +172,7 @@ void CporganjipDlg::On32771()
 	{
 		UpdateData(0);
 		head=head->addstudnet(ob1.m_name,ob1.m_lastname,ob1.score);
-		head = head->sort();
+		head->sort();
 	}
 }
 
